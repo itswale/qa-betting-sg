@@ -48,7 +48,8 @@ Count matches filtered list.
 Count can stay at the old total while the list shrinks.
 
 **Evidence**  
-Manual on live URL; optional DOM capture via devtools or `automation/` pytest with `PWDEBUG=1`.
+Manual on live URL; optional DOM capture via devtools or `automation/` pytest with `PWDEBUG=1`.<img width="1393" height="414" alt="Screenshot 2026-05-03 at 3 01 32 PM" src="https://github.com/user-attachments/assets/19a23511-b49d-4cf4-bde7-e79538871143" />
+
 
 **Suggested fix**  
 Bind `#match-list-count` to the same filtered data as the cards.
@@ -80,6 +81,8 @@ Step 3 response: `"currency":"USD"`. Steps 1–2: `"currency":"EUR"`.
 
 **Evidence**  
 Same three requests in order; screenshot or copy-paste of JSON `currency` fields.
+<img width="1269" height="789" alt="Screenshot 2026-05-03 at 3 09 27 PM" src="https://github.com/user-attachments/assets/faf090d9-e2de-4eca-9f6a-9119b8b0de18" />
+
 
 **Suggested fix**  
 Return EUR consistently on all money responses.
@@ -97,7 +100,7 @@ Return EUR consistently on all money responses.
 Receipt should list Selection (HOME / DRAW / AWAY) with bet id, match, stake, odds, payout, time.
 
 **Actual**  
-Client exposes ids like `modal-success-bet-id`, `modal-success-match`, … but not `modal-success-selection`. Selection only appears on the slip before place.
+Client exposes ids like `modal-success-bet-id`, `modal-success-match`, … but not `modal-success-selection`. Selection only appears on the slip before place.<img width="1385" height="641" alt="Screenshot 2026-05-03 at 3 11 31 PM" src="https://github.com/user-attachments/assets/1d8f5ec7-b9bd-45dc-9d8c-097110dc6160" />
 
 **Suggested fix**  
 Add a Selection row on the receipt, or change the spec if intentional.
