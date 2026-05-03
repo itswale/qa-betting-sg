@@ -1,0 +1,8 @@
+#!/bin/sh
+# Strips Cursor agent co-author trailer (injected by some IDE flows).
+# Enable: git config core.hooksPath .githooks
+tmp=$(mktemp) || exit 1
+grep -v '^Co-authored-by: Cursor <cursoragent@cursor.com>$' "$1" >"$tmp" || true
+cmp -s "$1" "$tmp" || mv "$tmp" "$1"
+rm -f "$tmp"
+exit 0

@@ -1,0 +1,25 @@
+name: automation
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  pytest:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: automation
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -U pip && pip install -e . && playwright install --with-deps chromium
+      - name: Tests
+        env:
+          BASE_URL: https://qae-assignment-tau.vercel.app
+          USER_ID: candidate-Z1tPv7cRx5K
+        run: PYTHONPATH=src python -m pytest tests/test_betting.py -v
