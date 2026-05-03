@@ -2,7 +2,7 @@
 
 Desktop web, football, pre-match, single bet. Money in EUR; API uses `x-user-id` on the same host as the UI.
 
-Each scenario: **ID**, **priority** (**Highest** → run first / blocking path; **High** → important next; **Lower** → second pass), **preconditions**, **steps**, **expected**, **assignment** (FR / § from the brief).
+Each scenario: **ID**, **priority** (**Highest** → run first / blocking path; **High** → important next; **Lower** → second pass), **preconditions**, **steps**, **expected**, **assignment** (FR /   from the brief).
 
 ### Postman / API
 
@@ -32,9 +32,10 @@ For any `GET` / `POST` below, use Postman (or another HTTP client) with the same
 | **Preconditions** | Enough balance (`GET …/api/balance`). At least one match (`GET …/api/matches`). Optional: `POST …/api/reset-balance` for a known balance. |
 | **Steps** | 1. Open app with valid `?user-id=`. 2. Pick 1, X, or 2 on one match. 3. Stake between €1.00 and €100.00 (e.g. €10.00). 4. Place bet. 5. If shown, Placing… then success receipt. 6. Close receipt. |
 | **Expected** | Balance decreases. Receipt shows bet id, match, stake, odds, potential payout, time. After close, slip empty or no active bet. |
-| **Assignment** | FR 2.1–2.4; stake §4.1 |
+| **Assignment** | FR 2.1–2.4; stake  4.1 |
 
-**Automated:** `automation/tests/test_betting.py` → `test_place_bet_happy_path` (HOME, €10; receipt fields the test asserts, balance via API). Not a full manual receipt audit.
+**Automated:** `automation/tests/test_betting.py` → `test_place_bet_happy_path` (HOME, €10; receipt fields the test asserts, balance via API). Not a full manual receipt audit.<img width="733" height="252" alt="Screenshot 2026-05-03 at 3 17 57 PM" src="https://github.com/user-attachments/assets/b97785d7-cb31-4d1b-93b0-2c389bdbf88e" />
+
 
 ---
 
@@ -59,9 +60,9 @@ For any `GET` / `POST` below, use Postman (or another HTTP client) with the same
 | Empty | Clear field | Disabled / blocked | 422 if bad request |
 | Over balance | stake above wallet | Insufficient message | Should reject — [bug-reports.md](bug-reports.md) if not |
 
-**Assignment:** §4.1, §4.4  
+**Assignment:** 4.1,  4.4  
 
-**Automated:** `test_stake_below_minimum_shows_warning` only (€0.99 → minimum copy). Rest manual or Postman.
+**Automated:** `test_stake_below_minimum_shows_warning` only (€0.99 → minimum copy). Rest manual or Postman.<img width="733" height="252" alt="Screenshot 2026-05-03 at 3 17 57 PM" src="https://github.com/user-attachments/assets/b97785d7-cb31-4d1b-93b0-2c389bdbf88e" />
 
 ---
 
@@ -117,7 +118,7 @@ For any `GET` / `POST` below, use Postman (or another HTTP client) with the same
 | **ID** | TC-06 |
 | **Priority** | Lower |
 | **Preconditions** | Postman; `x-user-id` matches UI when comparing to browser. |
-| **Steps** | Run each check; compare status/body to OpenAPI / §5. |
+| **Steps** | Run each check; compare status/body to OpenAPI /  5. |
 | **Expected** | Matches spec. |
 
 | Check | Postman | Expected |
@@ -131,7 +132,7 @@ For any `GET` / `POST` below, use Postman (or another HTTP client) with the same
 | Double submit | Two overlapping POSTs if applicable | 409 if reproducible |
 | Reset | POST `…/api/reset-balance` then GET balance | 200; balance matches reset |
 
-**Assignment:** §5  
+**Assignment:**  5  
 
 **Automated:** No.
 
