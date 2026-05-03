@@ -6,18 +6,18 @@ Companion to [bug-reports.md](bug-reports.md) and [test-plan.md](test-plan.md). 
 
 - Money path: balance, stake rules, amounts shown vs API (**BUG-002**, **BUG-004**, **BUG-006**, **BUG-007**).
 - UX vs brief: slip, filters, modals, receipt (**BUG-001**, **BUG-003**, **BUG-005**).
-- Automation: two Playwright tests in [`automation/tests/test_betting.py`](../automation/tests/test_betting.py). Everything else is manual or Postman per the test plan.
+- Automation: two Pytest/Playwright tests in [`automation/tests/test_betting.py`](../automation/tests/test_betting.py). Everything else is manual or Postman per the test plan.
 
 ## Risk (from the bug log)
 
 | Area | Bug | Coverage |
 |------|-----|----------|
 | Balance / overdraft | **BUG-004** | Bug report steps; happy-path test only checks balance after a valid bet |
-| Payout wrong on receipt | **BUG-006** | Manual / Playwright in bug report; automation checks modal payout shape, not slip vs modal |
+| Payout wrong on receipt | **BUG-006** | Manual / Pytest/Playwright in bug report; automation checks modal payout shape, not slip vs modal |
 | Currency in JSON | **BUG-002** | Postman in bug report |
 | Filter count vs list | **BUG-001** | TC-05 manual |
 | Receipt missing Selection | **BUG-003** | Manual |
-| Escape and modals | **BUG-005** | Playwright in bug report |
+| Escape and modals | **BUG-005** | Pytest/Playwright in bug report |
 | API vs OpenAPI | **BUG-002**, **BUG-004**, TC-06 | Postman |
 | Header vs API after reset | **BUG-007** | Manual browser + Postman |
 
