@@ -4,7 +4,7 @@ Manual and API checks against the hosted app.
 
 **App:** `https://qae-assignment-tau.vercel.app`  
 **Sample user:** `candidate-Z1tPv7cRx5K` (use in `?user-id=` and header `x-user-id`)  
-**Updated:** 2026-05-02  
+**Updated:** 2026-05-03  
 
 BUG-002–006: verified on that host(browser where noted). BUG-007: browser + Postman with the same user id. BUG-001 is UI-only.
 
@@ -135,7 +135,10 @@ Use one user id in `x-user-id` for every step (e.g. `candidate-Z1tPv7cRx5K`). Sa
 **422** (or similar) and no bet; balance must not go negative.
 
 **Actual**  
-**200** on step 4; response body can show `"balance":-70`. Step 3 may still show `"balance":30` depending on timing — note both.
+**200** on step 4; response body can show `"balance":-70, or -160`. Step 3 may still show `"balance":30` depending on timing — note both.<img width="1269" height="788" alt="Screenshot 2026-05-03 at 4 09 11 PM" src="https://github.com/user-attachments/assets/751ee219-1549-43cd-a758-3745ca2ba3b7" />
+On FE: <img width="1388" height="412" alt="Screenshot 2026-05-03 at 4 14 46 PM" src="https://github.com/user-attachments/assets/12540a88-acc0-4f73-bd68-0f56a02d1706" />
+
+
 
 **Suggested fix**  
 Validate stake ≤ balance before commit; clear errors; tests for the rule.
@@ -166,7 +169,7 @@ Wire Escape to the same close path as Close/backdrop; handle focus.
 
 ---
 
-## BUG-006 — Success modal payout ≠ slip (and API)
+## BUG-006 — Success modal payout ≠ slip
 
 | Field | Value |
 |--------|--------|
@@ -186,16 +189,18 @@ Open app with `?user-id=` → pick HOME on Man Utd vs Chelsea → stake **€1.0
    — Send — **200** — in the response, confirm `"payout":2.45` and `"odds":2.45` (values may be numbers without quotes in Pretty view).
 
 **Expected**  
-Slip and modal both show **€2.45**; Postman step 2 matches.
+Slip and modal both show **€2.45**;.
 
 **Actual**  
 Slip €2.45; modal €2.00; odds still 2.45 on modal; Postman shows `payout` **2.45**.
 
 **Evidence**  
-Screenshots (slip + modal) plus Postman response body for step 2.
+Screenshots (slip + modal).
+Slip:<img width="1391" height="511" alt="Screenshot 2026-05-03 at 4 25 51 PM" src="https://github.com/user-attachments/assets/4a963ebd-86dd-4e58-80bd-caaa4eea5716" />
+Modal:<img width="1383" height="631" alt="Screenshot 2026-05-03 at 4 26 31 PM" src="https://github.com/user-attachments/assets/9d243cb8-d45c-4874-af47-1b08675353b8" />
 
 **Suggested fix**  
-Receipt payout from same source as slip / `place-bet` response; regression: slip vs modal before close.
+Receipt payout from same source as slip should match; regression: slip vs modal before close.
 
 ---
 
@@ -231,6 +236,9 @@ Example: step 3–4 show **125.5**; step 5 header still **€120** after refresh
 
 **Evidence**  
 Postman response bodies from steps 3–4 + note or screenshot of header after step 5.
+Response: <img width="1262" height="732" alt="Screenshot 2026-05-03 at 4 30 52 PM" src="https://github.com/user-attachments/assets/69e76352-6624-4419-be33-8bc906d4cb73" />
+
+On FE: <img width="1383" height="479" alt="Screenshot 2026-05-03 at 4 31 48 PM" src="https://github.com/user-attachments/assets/f7eae9ee-c6e8-48ef-8c6a-2aa375695e1a" />
 
 **Suggested fix**  
 Load header from `GET /api/balance` after navigation and after server-side balance changes. If GET disagrees with reset, fix server read/persistence first.
